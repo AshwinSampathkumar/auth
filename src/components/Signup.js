@@ -75,7 +75,7 @@ export class Signup extends Component {
                         <input name="confirmpassword" type="password" class="form-control" value={this.state.confirmpassword} onChange={this.handleChange}/>
                         <div class="clearfix"></div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block mt-4">Sign Up</button>
+                    <button type="submit" class="btn btn-primary btn-block mt-4" onClick={() => { if (window.confirm('You have been registered successfully!')) this.onCancel() } }>Sign Up</button>
                     <div class="bg-lightest text-muted small p-2 mt-4">
                         <label class="custom-control custom-checkbox m-0">
                             <input name="rememberMe" checked={this.state.rememberMe} onChange={this.handleChange} type="checkbox" class="custom-control-input" />
