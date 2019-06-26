@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import superagent from 'superagent';
-
+import {Redirect} from 'react-router-dom'
 
 export class Login extends Component {
     // constructor(){
@@ -37,7 +37,18 @@ export class Login extends Component {
     state = {
         emailid: "",
         password: "",
-        rememberMe: false
+        rememberMe: false,
+        redirect: false
+    }
+    setRedirect = () =>{
+        this.setState({
+            redirect: true
+        })
+    }
+    renderRedirect = () => {
+        if(this.state.redirect){
+            return <Redirect to='/Signin' />
+        }
     }
     handleChange= (event) => {
         const input =event.target;
@@ -49,6 +60,7 @@ export class Login extends Component {
         localStorage.setItem('rememberMe', rememberMe);
         localStorage.setItem('emailid', rememberMe ? emailid : '');
         localStorage.setItem('password', rememberMe ? password : '');
+    
     };
   render(){
     return (
@@ -100,7 +112,7 @@ export class Login extends Component {
     
                     <div class="text-center text-muted">
                         Don't have an account yet?
-                        <a href="Signup.js">Sign Up</a>
+                        <a href="Signup">Sign Up</a>
                     </div>
     
                 </div>

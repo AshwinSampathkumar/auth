@@ -82,7 +82,7 @@ export class Signup extends Component {
 
                 <div class="text-center text-muted">
                     Already have an account?
-                    <a href="pages_authentication_login-v1.html">Sign In</a>
+                    <a href="Login">Sign In</a>
                 </div>
 
             </div>
