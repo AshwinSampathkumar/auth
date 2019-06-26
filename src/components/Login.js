@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import superagent from 'superagent';
-import {Redirect} from 'react-router-dom'
 
 export class Login extends Component {
     // constructor(){
@@ -38,17 +36,6 @@ export class Login extends Component {
         emailid: "",
         password: "",
         rememberMe: false,
-        redirect: false
-    }
-    setRedirect = () =>{
-        this.setState({
-            redirect: true
-        })
-    }
-    renderRedirect = () => {
-        if(this.state.redirect){
-            return <Redirect to='/Signin' />
-        }
     }
     handleChange= (event) => {
         const input =event.target;
