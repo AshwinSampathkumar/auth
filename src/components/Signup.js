@@ -7,19 +7,22 @@ export class Signup extends Component {
         emailid: "",
         mobile: "",
         password: "",
-        confirmpassword: ""
+        confirmpassword: "",
+        rememberMe: false
     }
-    confirmation= () =>{
-        if(this.state.confirmpassword === this.state.password){
-            return true;
-        }
-    }
-    handleSignupSubmit = () => {
-        const { username, emailid, mobile, password, confirmpassword } = this.state;
-        localStorage.setItem('username', this.confirmation ? username: '');
-        localStorage.setItem('emailid', this.confirmation ? emailid : '');
-        localStorage.setItem('mobile', this.confirmation ? mobile : '');
-        localStorage.setItem('password', this.confirmation ? password : '');
+    handleChange= (event) => {
+        const input =event.target;
+        const value = input.type === 'checkbox' ? input.checked : input.value;
+        this.setState({[input.name]: value});
+    };
+
+    handleFormSubmit = () => {
+        const { username, emailid, mobile, password, rememberMe} = this.state;
+        localStorage.setItem('rememberMe', rememberMe);
+        localStorage.setItem('username', rememberMe ? username: '');
+        localStorage.setItem('emailid', rememberMe ? emailid : '');
+        localStorage.setItem('mobile', rememberMe ? mobile : '');
+        localStorage.setItem('password', rememberMe ? password : '');
     };
   render() {
     return (
@@ -46,36 +49,38 @@ export class Signup extends Component {
                 {/* <!-- [ Logo ] End --> */}
 
                 {/* <!-- [ Form ] Start --> */}
-                <form class="my-5" onSubmit={this.handleSignupSubmit}>
+                <form class="my-5" onSubmit={this.handleFormSubmit}>
                     <div class="form-group">
                         <label class="form-label">Your name</label>
-                        <input value={this.state.username} id="username" type="text" class="form-control" /> 
+                        <input name="username" type="text" class="form-control" value={this.state.username} onChange={this.handleChange}/> 
                         <div class="clearfix"></div>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Your email</label>
-                        <input id="emailid" type="text" class="form-control" value={this.state.emailid}/>
+                        <input name="emailid" type="text" class="form-control" value={this.state.emailid} onChange={this.handleChange}/>
                         <div class="clearfix"></div>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Your Mobile Number</label>
-                        <input id="mobile" type="text" class="form-control" value={this.state.mobile}/>
+                        <input name="mobile" type="text" class="form-control" value={this.state.mobile} onChange={this.handleChange}/>
                         <div class="clearfix"></div>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Password</label>
-                        <input id="password" type="password" class="form-control" value={this.state.password}/>
+                        <input name="password" type="password" class="form-control" value={this.state.password} onChange={this.handleChange}/>
                         <div class="clearfix"></div>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Confirm Password</label>
-                        <input id="confirmpassword" type="text" class="form-control" value={this.state.confirmpassword}/>
+                        <input name="confirmpassword" type="password" class="form-control" value={this.state.confirmpassword} onChange={this.handleChange}/>
                         <div class="clearfix"></div>
                     </div>
                     <button type="submit" class="btn btn-primary btn-block mt-4">Sign Up</button>
                     <div class="bg-lightest text-muted small p-2 mt-4">
-                        By clicking "Sign Up", you agree to our
-                        <a href="javascript:void(0)">terms of service and privacy policy</a>. We’ll occasionally send you account related emails.
+                        <label class="custom-control custom-checkbox m-0">
+                            <input name="rememberMe" checked={this.state.rememberMe} onChange={this.handleChange} type="checkbox" class="custom-control-input" />
+                            <span class="custom-control-label">I agree to the Terms and Conditions</span>
+                        </label>
                     </div>
                 </form>
                 {/* <!-- [ Form ] End --> */}
